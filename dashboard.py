@@ -22,8 +22,8 @@ filtered = df[df['Year'] == selected_year]
 st.subheader('Events in', selected_year)
 st.dataframe(filtered)
 
-category_counts = filtered[1].value_counts().reset_index()
-category_counts.columns = [1, 'Count']
+stat_counts = filtered[1].value_counts().reset_index()
+stat_counts.columns = [1, 'Count']
 
-st.bar_chart(category_counts.set_index('Category'))
+st.bar_chart(stat_counts.set_index(1))
 st.write(df.head())
