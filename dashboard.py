@@ -3,7 +3,6 @@ import pandas as pd
 import sqlite3
 
 @st.cache_data
-
 def load_data():
     conn = sqlite3.connect('baseball.db')
     df = pd.read_sql('SELECT * FROM events', conn)
