@@ -6,7 +6,7 @@ import sqlite3
 
 def load_data():
     conn = sqlite3.connect('baseball.db')
-    df = pd.read_sql('Select * FROM events', conn)
+    df = pd.read_sql('SELECT * FROM events', conn)
     conn.close()
 
     return df
