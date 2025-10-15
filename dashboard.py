@@ -5,7 +5,7 @@ import sqlite3
 @st.cache_data
 def load_data():
     conn = sqlite3.connect('baseball.db')
-    df = pd.read_sql('SELECT * FROM events', conn)
+    df = pd.read_sql('Select * FROM get_data', conn)
     conn.close()
 
     return df
@@ -19,11 +19,11 @@ years = sorted(df['Year'].unique())
 selected_year = st.selectbox('Select Year', years)
 filtered = df[df['Year'] == selected_year]
 
-st.subheader('Events in', selected_year)
+st.subheader(f'Statistics in {selected_year}')
 st.dataframe(filtered)
 
-stat_counts = filtered[1].value_counts().reset_index()
-stat_counts.columns = [1, 'Count']
+stat_counts = filtered['Stat'].value_counts().reset_index()
+stat_counts.columns = ['Stat', 'Count']
 
-st.bar_chart(stat_counts.set_index(1))
+st.bar_chart(stat_counts.set_index('Stat'))
 st.write(df.head())

@@ -8,7 +8,7 @@ import pandas as pd
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
-options.add_argument('--headless')
+options.add_argument('--no-sandbox')
 options.add_argument('--disable-gpu')
 
 driver = webdriver.Chrome(service = ChromeService(ChromeDriverManager().install()), options = options)
@@ -56,11 +56,11 @@ for year_text, href in year_links[:10]:
             rows.append([year_text, stat, names])
 
     except Exception as e:
-        print('Error scraping (year_text):', e)
+        print(f'Error scraping {year_text}:', e)
 
 driver.quit()
 
-df = pd.DataFrame(rows)
+df = pd.DataFrame(rows, columns = ['Year', 'Stat', 'Names'])
 print(df)
 
 df.to_csv('get_data.csv', index = False)

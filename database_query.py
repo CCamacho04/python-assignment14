@@ -4,11 +4,12 @@ conn = sqlite3.connect('baseball.db')
 cursor = conn.cursor()
 
 while True:
-    if input('SQL> ') in ['exit', 'quit']:
+    sql_input = input('SQL> ')
+    if sql_input ['exit', 'quit']:
         break
 
     try:
-        cursor.execute(input('SQL> '))
+        cursor.execute(input(sql_input))
         rows = cursor.fetchall()
 
         for r in rows:
