@@ -33,7 +33,7 @@ print(f'Found {len(year_links)} year links')
 
 rows = []
 
-for year_text, href in year_links[:10]:
+for year_text, href in year_links:
     driver.get(href)
     sleep(2)
 
@@ -53,6 +53,10 @@ for year_text, href in year_links[:10]:
 
             stat = tds[0].text.strip()
             names = tds[1].text.strip()
+
+            if stat.lower() == 'statistic' or names.lower() == 'name(s)':
+                continue
+
             rows.append([year_text, stat, names])
 
     except Exception as e:
@@ -64,3 +68,5 @@ df = pd.DataFrame(rows, columns = ['Year', 'Stat', 'Names'])
 print(df)
 
 df.to_csv('get_data.csv', index = False)
+
+print(df.head(20))
